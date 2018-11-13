@@ -1,0 +1,31 @@
+    <h4>{{auftrag.auftragsart}}<h4>
+    
+    <h1> Details</h1>      
+    
+    <h3> Laufende Nummer {{auftrag.id}}</h3>
+    
+    <h3> Empfänger</h3>
+    <h3>{{auftrag.empfaengerName}}</h3>
+       <h4> Bankinstitut</h4>
+       <div><a>{{auftrag.empfaengerInstitut}}</a></div>
+       <h4> IBAN + BIC</h4>
+         <div><a>{{auftrag.empfaengerIBAN}}</a></div>
+         <div><a>{{auftrag.empfaengerBIC}}</a></div>
+
+    <h3>Betrag</h3>
+    <h3>{{auftrag.auftragsbetrag}}</h3>
+       <h4> Verwendungszweck</h4>
+          <div><a>{{auftrag.verwendung}}</a></div>
+       <h4> Ausführung</h4>
+         <div><a>{{auftrag.ausfuehrung}}</a></div>
+         
+    <h3>Konto</h3>
+    <h3>{{auftrag.senderKontoart}}</h3>
+       <h4> IBAN + BIC</h4>   
+           <div><a>{{auftrag.senderIBAN}}</a></div>
+           <div><a>{{auftrag.senderBIC}}</a></div>
+           
+   <h4><span>Status </span>{{auftrag.status}}<h4>
+    
+   <button (click)="freigeben()">Freigeben</button>
+   <button (click)="goBack()">Zurück</button>

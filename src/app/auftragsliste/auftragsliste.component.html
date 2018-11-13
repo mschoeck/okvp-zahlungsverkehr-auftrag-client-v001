@@ -1,0 +1,8 @@
+<h2>Auftragsliste</h2>
+<ul class="auftragsliste">
+  <li *ngFor="let auftrag of auftragsliste">
+    <a routerLink="/detail/{{auftrag.id}}">
+      <span class="badge">{{auftrag.id}}</span> {{auftrag.empfaengerName}}
+    </a>
+  </li>
+</ul>

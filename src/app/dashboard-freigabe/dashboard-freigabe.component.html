@@ -1,0 +1,12 @@
+<h3>Auftragsliste</h3>
+<div class="grid grid-pad">
+  <a *ngFor="let auftrag of auftragsliste" class="col-1-4"
+    routerLink="/detail/{{auftrag.id}}">
+   <div class="module auftrag">
+      <h2>{{auftrag.empfaengerName}} {{auftrag.auftragsbetrag}}</h2>
+      <div><a>{{auftrag.auftragsart}}</a></div>
+      <div><a>{{auftrag.status}}</a></div>   
+      <div><a>Fälligkeit: {{auftrag.ausfuehrung}}</a></div>       
+    </div>
+  </a>
+</div>
