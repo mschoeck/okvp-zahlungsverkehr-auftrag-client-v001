@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { Auftrag } from './auftrag';
+import { Auftrag } from './entities/auftrag';
 
-import { ProzessReferenz, Prozessauftrag, Prozessauftragsliste, Aufgabe, Auftragsstatus } from './prozess';
+import { ProzessReferenz, Prozessauftrag, Prozessauftragsliste, Aufgabe, Auftragsstatus } from './entities/prozess';
 
 import { MessageService } from './message.service';
 

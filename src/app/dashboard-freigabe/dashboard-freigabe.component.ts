@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Auftrag } from '../auftrag';
+import { Auftrag } from '../entities/auftrag';
 import { AuftragService } from '../auftrag.service';
  
 @Component({

@@ -2,7 +2,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Auftrag } from '../auftrag';
+import { Auftrag } from '../entities/auftrag';
 import { AuftragService }  from '../auftrag.service';
 import { ProzessService }  from '../prozess.service';
 

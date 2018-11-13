@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 
-import { Auftrag } from './auftrag';
+import { Auftrag } from './entities/auftrag';
 
 import { InMemoryDataAuftragService } from './in-memory-data-auftrag.service';
 import { MessageService } from './message.service';

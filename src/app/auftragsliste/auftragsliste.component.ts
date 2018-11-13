@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
 import { AuftragService } from '../auftrag.service';
-import { Auftrag } from '../auftrag';
+import { Auftrag } from '../entities/auftrag';
 
 @Component({
   selector: 'app-auftragsliste',
