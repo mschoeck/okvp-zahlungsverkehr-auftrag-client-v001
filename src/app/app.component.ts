@@ -7,13 +7,15 @@ import { Location } from '@angular/common';
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.css']
 })
-export class AppComponent {  
+export class AppComponent {
   constructor(
     private route: ActivatedRoute,
     private location: Location
   ) {}
-  
+
+
   zurueck(): void {
     this.location.back();
   }
 }
+
