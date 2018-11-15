@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import {HttpClient, HttpHeaders} from '@angular/common/http'
 import { Auftrag } from '../entities/auftrag';
-import { AuftragService } from '../auftrag.service';
+import { MessageService } from '../message.service';
  
 @Component({
   selector: 'app-dashboard-freigabe',
@@ -11,14 +12,24 @@ import { AuftragService } from '../auftrag.service';
 export class DashboardFreigabeComponent implements OnInit {
   auftragsliste: Auftrag[] = [];
  
-  constructor(private auftragService: AuftragService) { }
+  constructor(private httpClient: HttpClient, private messageService: MessageService) { }
  
   ngOnInit() {
     this.getAuftragsliste();
   }
  
   getAuftragsliste(): void {
-    this.auftragService.getAuftragsliste()
-      .subscribe(auftragsliste => this.auftragsliste = auftragsliste.slice(0, 4));
+    this.messageService.add('load auftragsliste from backed');
+
+    let headers = new HttpHeaders().set('Accept', 'application/json');
+
+    this.httpClient.get<Auftrag[]>('http://localhost:8091/zahlungsauftraege', {headers})
+          .subscribe(
+            auftraege => {
+                  this.auftragsliste = auftraege.slice(0,4);
+                  this.messageService.add('auftragsliste loaded'),
+                error => this.messageService.add('Error: ' + error);
+          } 
+        );
   }
 }

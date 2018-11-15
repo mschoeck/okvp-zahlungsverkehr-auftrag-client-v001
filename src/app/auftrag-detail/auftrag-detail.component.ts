@@ -3,7 +3,8 @@ import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { Auftrag } from '../entities/auftrag';
-import { AuftragService }  from '../auftrag.service';
+import {HttpClient, HttpHeaders, HttpParams} from '@angular/common/http'
+import { MessageService } from '../message.service';
 import { ProzessService }  from '../prozess.service';
 
 @Component({
@@ -17,9 +18,10 @@ export class AuftragDetailComponent implements OnInit {
  
   constructor(
     private route: ActivatedRoute,
-    private auftragService: AuftragService,
     private prozessService: ProzessService,
-    private location: Location
+    private location: Location,
+    private httpClient: HttpClient,
+    private messageService: MessageService
   ) {}
  
   ngOnInit() {
@@ -28,15 +30,27 @@ export class AuftragDetailComponent implements OnInit {
   
   getAuftrag(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-    this.auftragService.getAuftrag(id)
-    .subscribe(auftrag => this.auftrag = auftrag);
+
+    this.messageService.add('load auftrag ['+id+'] from backed');
+
+    let headers = new HttpHeaders().set('Accept', 'application/json');
+
+    this.httpClient.get<Auftrag>('http://localhost:8091/zahlungsauftraege/'+id, {headers})
+          .subscribe(
+            auftrag => {
+                  this.auftrag = auftrag;
+                  this.messageService.add('auftrag ['+id+'] loaded'),
+                  error => this.messageService.add('Error: ' + error);
+          } 
+        );
   }
+
   
   freigeben(): void {
-    const id = +this.route.snapshot.paramMap.get('id');
-    this.auftragService.getAuftrag(id)
-       .subscribe(auftrag => this.auftrag = auftrag);
-    this.prozessService.freigeben(this.auftrag);
+    // const id = +this.route.snapshot.paramMap.get('id');
+    // this.auftragService.getAuftrag(id)
+    //    .subscribe(auftrag => this.auftrag = auftrag);
+    // this.prozessService.freigeben(this.auftrag);
   }
   
   goBack(): void {

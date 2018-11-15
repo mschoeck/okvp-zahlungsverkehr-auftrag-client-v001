@@ -1,31 +1,38 @@
-    <h4>{{auftrag.auftragsart}}<h4>
-    
-    <h1> Details</h1>      
-    
-    <h3> Laufende Nummer {{auftrag.id}}</h3>
-    
-    <h3> Empfänger</h3>
-    <h3>{{auftrag.empfaengerName}}</h3>
-       <h4> Bankinstitut</h4>
-       <div><a>{{auftrag.empfaengerInstitut}}</a></div>
-       <h4> IBAN + BIC</h4>
-         <div><a>{{auftrag.empfaengerIBAN}}</a></div>
-         <div><a>{{auftrag.empfaengerBIC}}</a></div>
-
-    <h3>Betrag</h3>
-    <h3>{{auftrag.auftragsbetrag}}</h3>
-       <h4> Verwendungszweck</h4>
-          <div><a>{{auftrag.verwendung}}</a></div>
-       <h4> Ausführung</h4>
-         <div><a>{{auftrag.ausfuehrung}}</a></div>
-         
-    <h3>Konto</h3>
-    <h3>{{auftrag.senderKontoart}}</h3>
-       <h4> IBAN + BIC</h4>   
-           <div><a>{{auftrag.senderIBAN}}</a></div>
-           <div><a>{{auftrag.senderBIC}}</a></div>
-           
-   <h4><span>Status </span>{{auftrag.status}}<h4>
-    
+<div style="text-align:left">
+<div class="card text-white bg-success mb-3" style="max-width: 30rem;">
+<div class="card-header">{{auftrag.art}}</div>
+<div class="card-body">
+   <h4 class="card-title">Details</h4>
+   <div id="wrapper">
+         <div id="erste_spalte">
+            <h6>Laufende Nummer</h6>
+            <h6>Empänger</h6>
+            <h6>Bankinstitut</h6>
+            <h6>IBAN</h6>
+            <h6>BIC</h6>
+            <h6>Betrag</h6>
+            <h6>Verwendungszweck</h6>
+            <h6>Ausführung</h6>
+            <h6>Konto</h6>
+            <h6>IBAN</h6>
+            <h6>BIC</h6>
+            <h6>Status</h6>
+         </div>
+         <div id="zweite_spalte">
+               <h6>{{auftrag.id}}</h6>
+               <h6>{{auftrag.empfaengerName}}</h6>
+               <h6>{{auftrag.empfaengerInstitut}}</h6>
+               <h6>{{auftrag.empfaengerIBAN}}</h6>
+               <h6>{{auftrag.empfaengerBIC}}</h6>
+               <h6>{{auftrag.betrag}}</h6>
+               <h6>{{auftrag.verwendung}}</h6>
+               <h6>{{auftrag.ausfuehrung}}</h6>
+               <h6>{{auftrag.senderKontoart}}</h6>
+               <h6>{{auftrag.senderIBAN}</h6>
+               <h6>{{auftrag.senderBIC}}</h6>
+               <h6>{{auftrag.status}}</h6>
+            </div>
+      </div>
+</div>
    <button (click)="freigeben()">Freigeben</button>
    <button (click)="goBack()">Zurück</button>
