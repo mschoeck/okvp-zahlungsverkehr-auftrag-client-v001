@@ -24,7 +24,7 @@ export class AuftragslisteComponent implements OnInit {
 
     let headers = new HttpHeaders().set('Accept', 'application/json');
 
-    this.httpClient.get<Auftrag[]>('http://localhost:8091/zahlungsauftraege' {headers})
+    this.httpClient.get<Auftrag[]>('http://localhost:8091/zahlungsauftraege', {headers})
           .subscribe(
             auftraege => {
                   this.auftragsliste = auftraege//.slice(0,4);

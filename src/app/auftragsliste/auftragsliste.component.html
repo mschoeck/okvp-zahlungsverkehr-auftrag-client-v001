@@ -12,7 +12,7 @@
     <tr class="table-active" *ngFor="let auftrag of auftragsliste" >
       <th scope="row" routerLink="/detail/{{auftrag.id}}">{{auftrag.id}}</th>
       <td routerLink="/detail/{{auftrag.id}}">{{auftrag.empfaengerName}}</td>
-      <td routerLink="/detail/{{auftrag.id}}">{{auftrag.betrag | number: '1.2'}}€</td>
+      <td routerLink="/detail/{{auftrag.id}}">{{auftrag.betrag | number: '1.2'}} €</td>
       <td routerLink="/detail/{{auftrag.id}}">{{auftrag.ausfuehrenZum | date: 'dd.MM.yyy'}}</td>
     </tr>
   </tbody>
