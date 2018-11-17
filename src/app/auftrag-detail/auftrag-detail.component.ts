@@ -2,10 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Location } from '@angular/common';
 
-import { Auftrag } from '../entities/auftrag';
-import {HttpClient, HttpHeaders} from '@angular/common/http';
-import { MessageService } from '../message.service';
-import { ProzessService } from '../prozess.service';
+import { Auftrag, Auftragsfreigabeschritt } from '../entities/auftrag';
+import { AuftragService } from '../auftrag.service';
 
 @Component({
   selector: 'app-auftrag-detail',
@@ -14,39 +12,57 @@ import { ProzessService } from '../prozess.service';
 })
 
 export class AuftragDetailComponent implements OnInit {
+  
+  freigabeMoeglich: boolean = true;
   auftrag: Auftrag;
+  schritt: Auftragsfreigabeschritt;
+
   constructor(
     private route: ActivatedRoute,
-    private prozessService: ProzessService,
     private location: Location,
-    private httpClient: HttpClient,
-    private messageService: MessageService
+    private auftragService: AuftragService,
   ) {}
+
   ngOnInit() {
     this.getAuftrag();
+    +this.route.snapshot.parent.queryParams.get();
   }
+
   getAuftrag(): void {
     const id = +this.route.snapshot.paramMap.get('id');
-
-    this.messageService.add('load auftrag [' + id + '] from backed');
-
-    const headers = new HttpHeaders().set('Accept', 'application/json');
-
-    this.httpClient.get<Auftrag>('http://localhost:8091/zahlungsauftraege/' + id, {headers})
-          .subscribe(
-            auftrag => {
-                  this.auftrag = auftrag;
-                  this.messageService.add('auftrag [' + id + '] loaded'),
-                  error => this.messageService.add('Error: ' + error);
-          }
-        );
+    this.auftragService.getAuftrag(id).subscribe(
+        auftrag => {
+            this.auftrag = auftrag;
+        }
+    )
   }
+
   freigeben(): void {
-    // const id = +this.route.snapshot.paramMap.get('id');
-    // this.auftragService.getAuftrag(id)
-    //    .subscribe(auftrag => this.auftrag = auftrag);
-    // this.prozessService.freigeben(this.auftrag);
+      const id = +this.route.snapshot.paramMap.get('id');
+      this.auftragService.naechsterFreigabeschritt(id).subscribe(
+        schritt => {
+        this.schritt = schritt;
+        this.auftragService.freigebenAuftrag(id, this.schritt.schrittid).subscribe (
+          schritt => {
+            this.schritt = schritt;
+        });
+      });
+      this.goBack();
   }
+
+  ablehnen(): void {
+    const id = +this.route.snapshot.paramMap.get('id');
+    this.auftragService.naechsterFreigabeschritt(id).subscribe(
+      schritt => {
+      this.schritt = schritt;
+      this.auftragService.ablehnenAuftrag(id, this.schritt.schrittid).subscribe(
+        schritt => {
+        this.schritt = schritt;
+        });  
+     });
+     this.goBack();
+}
+
   goBack(): void {
     this.location.back();
   }

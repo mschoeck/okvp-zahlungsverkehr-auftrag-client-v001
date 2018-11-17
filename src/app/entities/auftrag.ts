@@ -17,3 +17,9 @@ export class Auftrag {
   status: string;
   prozessId: string;
 }
+
+export class Auftragsfreigabeschritt {
+  auftragid: Number;
+  schrittid: string;
+  schrittart: string;
+}

@@ -13,7 +13,7 @@
             <h6>Betrag</h6>
             <h6>Verwendungszweck</h6>
             <h6>Ausführung</h6>
-            <h6>Konto</h6>
+            <h6>Kontoart</h6>
             <h6>IBAN</h6>
             <h6>BIC</h6>
             <h6>Status</h6>
@@ -26,7 +26,7 @@
                <h6>{{auftrag.empfaengerBIC}}</h6>
                <h6>{{auftrag.betrag | number: '1.2'}} €</h6>
                <h6>{{auftrag.verwendung}}</h6>
-               <h6>{{auftrag.ausfuehrung | date: 'dd.MM.yyy'}}</h6>
+               <h6>{{auftrag.ausfuehrenZum == null? 'Sofort' :(auftrag.ausfuehrenZum | date: 'dd.MM.yyy')}}</h6>
                <h6>{{auftrag.senderKontoart}}</h6>
                <h6>{{auftrag.senderIBAN}}</h6>
                <h6>{{auftrag.senderBIC}}</h6>
@@ -35,4 +35,5 @@
       </div>
 </div>
    <button (click)="freigeben()">Freigeben</button>
+   <button (click)="ablehnen()">Ablehnen</button>
    <button (click)="goBack()">Zurück</button>
