@@ -16,6 +16,7 @@ export class Auftrag {
   erfasser: string;
   status: string;
   prozessId: string;
+  aktuellerFreigeber: string;
 }
 
 export class Auftragsfreigabeschritt {

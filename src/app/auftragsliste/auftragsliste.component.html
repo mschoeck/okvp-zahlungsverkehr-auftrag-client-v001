@@ -1,8 +1,13 @@
-<h1>Auftragsliste</h1>
-<table class="table table-hover">
+<h2>Eingereichte Aufträge</h2>
+<div>   
+    <a type="button" class="btn btn-primary btn-md" routerLink="">Freizugebende Aufträge</a>
+    <h2></h2>
+</div>
+<h4 *ngIf="auftragsliste.length == 0">Keine Aufträge vorhanden</h4>
+<table *ngIf="auftragsliste.length > 0" class="table table-hover">
   <thead>
     <tr>
-      <th scope="col">Laufende Nr.</th>
+      <th scope="col">Nr.</th>
       <th scope="col">Empfänger</th>
       <th scope="col">Betrag</th>
       <th scope="col">Fälligkeit</th>
@@ -18,4 +23,9 @@
   </tbody>
   <!-- routerLink="/detail/{{auftrag.id}}"> -->
 </table>
+<div>
+    <a type="button" class="btn btn-primary btn-md" routerLink="../login">Logout</a>
+    <h2></h2>
+  </div>
+
 

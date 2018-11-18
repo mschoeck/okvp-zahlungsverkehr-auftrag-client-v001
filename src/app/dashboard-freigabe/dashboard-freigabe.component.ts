@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Auftrag } from '../entities/auftrag';
 import { AuftragService } from '../auftrag.service';
+import { MessageService } from '../message.service';
 
 @Component({
   selector: 'app-dashboard-freigabe',
@@ -11,10 +13,17 @@ import { AuftragService } from '../auftrag.service';
 export class DashboardFreigabeComponent implements OnInit {
   auftragsliste: Auftrag[] = [];
   constructor(
-    private auftragService: AuftragService) { }
- 
+    private auftragService: AuftragService,
+    private messageService: MessageService,
+    private route: ActivatedRoute, 
+    private router: Router
+    ) 
+  {
+  }
+
   ngOnInit() {
-    this.getAuftragsliste();
+    this.messageService.addInfo('OnInit für DashboardFreigabe gerufen');
+    this.reload();
   }
 
   getAuftragsliste(): void {
@@ -22,5 +31,9 @@ export class DashboardFreigabeComponent implements OnInit {
      auftragsliste => {
          this.auftragsliste = auftragsliste;
      });
- }
+   }
+
+   private reload() : void {
+    this.getAuftragsliste();
+   }
 }

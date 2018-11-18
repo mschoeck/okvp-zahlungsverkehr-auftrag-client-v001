@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
 import { MessageService } from './message.service';
+import { AuthentifizierungService} from './authentifizierung.service';
 import { Auftrag, Auftragsfreigabeschritt } from './entities/auftrag';
 import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 
@@ -10,27 +11,24 @@ import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 })
 
 export class AuftragService {
-   
-   userid : string;
    baseURL : string ;
    headers : HttpHeaders;
-   params : HttpParams;
    auftrag : Auftrag;
 
   constructor(  
     private http: HttpClient,
-    private messageService: MessageService) 
+    private messageService: MessageService,
+    private authentifizierungService: AuthentifizierungService) 
     { 
-      this.userid = 'ycm4444';
       this.baseURL = 'http://localhost:8091/zahlungsauftraege/';
       this.headers = new HttpHeaders().set('Accept', 'application/json');
-      this.params = new HttpParams().set('userid', this.userid);
     }
 
     getAuftrag(id: number) : Observable<Auftrag> {
-       this.messageService.add('getAuftrag [' + id + ']');
+       this.messageService.addInfo('getAuftrag [' + id + ']');
        const url = this.baseURL + id;
        const headers = this.headers;
+       const params = new HttpParams().set('userid', this.authentifizierungService.getCurrentUser());
        
        return this.http.get<Auftrag>(url, {headers}).pipe(
         catchError(this.handleError<Auftrag>(`getAuftrag id=${id}`))
@@ -38,11 +36,11 @@ export class AuftragService {
     }
 
     getAuftraegeEingereicht() : Observable<Auftrag[]> {
-      this.messageService.add('getAuftraegeEingereicht');
+      this.messageService.addInfo('getAuftraegeEingereicht');
   
       const url= this.baseURL + '/eingereicht';
       const headers = this.headers;
-      const params =  this.params;
+      const params = new HttpParams().set('userid', this.authentifizierungService.getCurrentUser());
   
       return this.http.get<Auftrag[]>(url, {headers, params}).pipe(
         catchError(this.handleError('getAuftraegeEingereicht', []))
@@ -50,11 +48,11 @@ export class AuftragService {
     }
 
     getAuftraegeFreizugeben() : Observable<Auftrag[]> {
-      this.messageService.add('getAuftraegeFreizugeben');
+      this.messageService.addInfo('getAuftraegeFreizugeben');
   
       const url= this.baseURL + '/offen';
       const headers = this.headers;
-      const params =  this.params;
+      const params = new HttpParams().set('userid', this.authentifizierungService.getCurrentUser());
   
       return this.http.get<Auftrag[]>(url, {headers, params}).pipe(
         catchError(this.handleError('getAuftraegeFreizugeben', []))
@@ -62,10 +60,10 @@ export class AuftragService {
     }
 
     naechsterFreigabeschritt(id: number) : Observable<Auftragsfreigabeschritt> {
-      this.messageService.add('naechsterFreigabeschritt [' + id + ']');
+      this.messageService.addInfo('naechsterFreigabeschritt [' + id + ']');
       const url= this.baseURL  + id + '/freigabeschritt';
       const headers = this.headers;
-      const params =  this.params;
+      const params = new HttpParams().set('userid', this.authentifizierungService.getCurrentUser());
       
       return this.http.get<Auftragsfreigabeschritt>(url, { headers,  params } ).pipe(
         catchError(this.handleError<Auftragsfreigabeschritt>(`naechsterFreigabeschritt Auftrag id=${id}`))
@@ -73,21 +71,21 @@ export class AuftragService {
     }
 
     freigebenAuftrag(id: number, schrittid: string) : Observable<Auftragsfreigabeschritt> {
-       this.messageService.add('freigebenAuftrag (' + id + '), Schritt (' + schrittid + ')');
+       this.messageService.addInfo('freigebenAuftrag (' + id + '), Schritt (' + schrittid + ')');
        const url= this.baseURL + id + '/freigabeschritt/' + schrittid + '/freigeben';
        const headers = this.headers;
-       const params =  this.params;
-       this.messageService.add('URL: ' + url);
+       const params = new HttpParams().set('userid', this.authentifizierungService.getCurrentUser());
+       this.messageService.addInfo('URL: ' + url);
        return this.http.get<Auftragsfreigabeschritt>(url, {headers, params}).pipe(
          catchError(this.handleError<Auftragsfreigabeschritt>(`freigebenAuftrag id=${id}`))
       );
      }
 
      ablehnenAuftrag(id: number, schrittid: string) : Observable<Auftragsfreigabeschritt> {
-      this.messageService.add('ablehnenAuftrag (' + id + ')');
+      this.messageService.addInfo('ablehnenAuftrag (' + id + ')');
       const url= this.baseURL + id + '/freigabeschritt/' + schrittid + '/ablehnen';
       const headers = this.headers;
-      const params =  this.params;
+      const params = new HttpParams().set('userid', this.authentifizierungService.getCurrentUser());
       return this.http.get<Auftragsfreigabeschritt>(url, {headers, params}).pipe(
         catchError(this.handleError<Auftragsfreigabeschritt>(`ablehnenAuftrag id=${id}`))
       );
@@ -100,7 +98,7 @@ export class AuftragService {
         console.error(error); // log to console instead
      
         // TODO: better job of transforming error for user consumption
-        this.messageService.add(`${operation} failed: ${error.message}`);
+        this.messageService.error(`${operation} failed: ${error.message}`);
      
         // Let the app keep running by returning an empty result.
         return of(result as T);

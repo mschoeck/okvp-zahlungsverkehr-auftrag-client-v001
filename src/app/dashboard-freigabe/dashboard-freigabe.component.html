@@ -1,15 +1,28 @@
-<h1>Auftragsliste</h1>
-<div class="grid grid-pad">
-  <a *ngFor="let auftrag of auftragsliste" class="col-1-4">
+<div class="well">
+  <h2> Freizugebende Aufträge</h2>
+  <h2></h2>
+  <div>
+    <a type="button" class="btn btn-primary btn-md" routerLink="auftragsliste">Eingereichte Aufträge</a>
+    <h2></h2>
+  </div>
+  <h4 *ngIf="auftragsliste.length == 0">Keine Aufträge vorhanden</h4>
+  <div class="grid grid-pad" *ngFor="let auftrag of auftragsliste" class="col-1-2">
     <div class="card text-white bg-info mb-3" style="max-width: 20rem;" routerLink="/detail/{{auftrag.id}}">
-      <div class="card-header">{{auftrag.art}}</div>
+      <div class="card-header">{{auftrag.art}}<span>  Nr.  </span>{{auftrag.id}}</div>
       <div class="card-body">
         <h4 class="card-title">{{auftrag.empfaengerName}}</h4>
         <h2 class="cart-tetle">{{auftrag.betrag | number: '1.2'}} €</h2>
         <p class="card-text">Fälligkeit: {{auftrag.ausfuehrenZum == null? 'Sofort' :(auftrag.ausfuehrenZum | date: 'dd.MM.yyy')}}</p>
       </div>
     </div>
-  </a>
+  </div>
+  <div>
+    <a type="button" class="btn btn-primary btn-md" routerLink="../login">Logout</a>
+    <h2></h2>
+  </div>
 </div>
+
+
+
 
 

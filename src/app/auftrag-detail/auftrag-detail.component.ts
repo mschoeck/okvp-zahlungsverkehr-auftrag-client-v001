@@ -4,6 +4,8 @@ import { Location } from '@angular/common';
 
 import { Auftrag, Auftragsfreigabeschritt } from '../entities/auftrag';
 import { AuftragService } from '../auftrag.service';
+import { MessageService } from '../message.service';
+import { AuthentifizierungService } from '../authentifizierung.service';
 
 @Component({
   selector: 'app-auftrag-detail',
@@ -16,16 +18,21 @@ export class AuftragDetailComponent implements OnInit {
   freigabeMoeglich: boolean = true;
   auftrag: Auftrag;
   schritt: Auftragsfreigabeschritt;
+  userid:string;
+
 
   constructor(
     private route: ActivatedRoute,
     private location: Location,
     private auftragService: AuftragService,
+    private messageService: MessageService,
+    private authentifizierungService : AuthentifizierungService
   ) {}
 
   ngOnInit() {
+    this.messageService.addInfo('OnInit für AuftragDetail gerufen');
+    this.userid = this.authentifizierungService.getCurrentUser();
     this.getAuftrag();
-    +this.route.snapshot.parent.queryParams.get();
   }
 
   getAuftrag(): void {
@@ -45,9 +52,9 @@ export class AuftragDetailComponent implements OnInit {
         this.auftragService.freigebenAuftrag(id, this.schritt.schrittid).subscribe (
           schritt => {
             this.schritt = schritt;
+            this.goBack();
         });
       });
-      this.goBack();
   }
 
   ablehnen(): void {
@@ -58,10 +65,10 @@ export class AuftragDetailComponent implements OnInit {
       this.auftragService.ablehnenAuftrag(id, this.schritt.schrittid).subscribe(
         schritt => {
         this.schritt = schritt;
+        this.goBack();
         });  
      });
-     this.goBack();
-}
+  }
 
   goBack(): void {
     this.location.back();

@@ -5,11 +5,16 @@ import { Injectable } from '@angular/core';
 })
 
 export class MessageService {
-  enableMessaging: boolean = true;
+  enableMessagingInfo: boolean = false;
   messages: string[] = [];
 
-  add(message: string) {
-    if (this.enableMessaging)
+  addInfo(message: string) {
+    if (this.enableMessagingInfo)
+      this.messages.push(message);
+  }
+
+  error(message: string) {
+      this.clear();
       this.messages.push(message);
   }
   

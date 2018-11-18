@@ -1,13 +1,13 @@
 /* DetailComponent's private CSS styles */
 #wrapper {
-	width: 501px;
+	width: 560px;
 }
 #erste_spalte {
-	width: 150px;
+	width: 100px;
 	float:left;
 }
 #zweite_spalte {
-	margin-left: 180px;
+	margin-left: 110px;
 	width: 300px;
 }
 
