@@ -1,0 +1,10 @@
+<div class="well">
+  <div>
+      <a>
+          <img src={{imageurl}}>
+      </a>
+  </div>
+  <div class="btn-group" *ngFor="let buttonname of schritt.buttonnames;let i = index">
+      <button class="btn-info btn-md" (click)="doit(schritt.buttonvariables[i])">{{buttonname}}</button>
+  </div>
+</div>

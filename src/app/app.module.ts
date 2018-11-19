@@ -11,6 +11,7 @@ import { MessagesComponent } from './messages/messages.component';
 import { DashboardFreigabeComponent } from './dashboard-freigabe/dashboard-freigabe.component';
 import { AuftragslisteComponent } from './auftragsliste/auftragsliste.component';
 import { AuftragDetailComponent } from './auftrag-detail/auftrag-detail.component';
+import { UicontrolComponent } from './uicontrol/uicontrol.component';
 
 @NgModule({
  imports: [
@@ -26,6 +27,7 @@ import { AuftragDetailComponent } from './auftrag-detail/auftrag-detail.componen
     AuftragDetailComponent,
     LoginComponent,
     MessagesComponent,
+    UicontrolComponent,
   ],
   providers: [
   ],

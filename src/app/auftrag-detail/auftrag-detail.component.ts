@@ -1,11 +1,13 @@
 import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Location } from '@angular/common';
 
 import { Auftrag, Auftragsfreigabeschritt } from '../entities/auftrag';
 import { AuftragService } from '../auftrag.service';
 import { MessageService } from '../message.service';
 import { AuthentifizierungService } from '../authentifizierung.service';
+import { UiprozessService } from '../uiprozess.service';
+import { Bedienerschritt } from '../entities/prozess';
 
 @Component({
   selector: 'app-auftrag-detail',
@@ -19,6 +21,7 @@ export class AuftragDetailComponent implements OnInit {
   auftrag: Auftrag;
   schritt: Auftragsfreigabeschritt;
   userid:string;
+  bedienerschritt: Bedienerschritt;
 
 
   constructor(
@@ -26,7 +29,9 @@ export class AuftragDetailComponent implements OnInit {
     private location: Location,
     private auftragService: AuftragService,
     private messageService: MessageService,
-    private authentifizierungService : AuthentifizierungService
+    private authentifizierungService : AuthentifizierungService,
+    private uiprozessService : UiprozessService,
+    private router: Router
   ) {}
 
   ngOnInit() {

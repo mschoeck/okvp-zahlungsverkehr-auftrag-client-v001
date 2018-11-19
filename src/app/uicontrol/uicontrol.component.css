@@ -1,0 +1,8 @@
+.well {
+	background: #CCC;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left:20px;
+	padding-right:20px;
+    min-width:400px;
+}

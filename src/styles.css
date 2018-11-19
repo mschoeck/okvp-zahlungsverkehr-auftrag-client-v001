@@ -3,14 +3,23 @@
 @import "../node_modules/bootswatch/dist/sketchy/_bootswatch.scss"; 
 @import "../node_modules/bootswatch/dist/sketchy/bootstrap.css";
 @import "../node_modules/bootswatch/dist/sketchy/bootstrap.min.css";
-    .bg{
-       background: url('./assets/images/background1.jpg') no-repeat top;
-       background-size: 100% 600px;
-       background-color: rgb(19, 18, 18);
-       margin-top: -30px;
-      }
-     
-      #appbereich {
-        display:flex;
-        justify-content: center;
-      }
+
+
+.bg{
+  width: 100%;
+  height: 100%;
+  background: url('./assets/images/background1.jpg') no-repeat top;
+  background-color: rgb(19, 18, 18);
+  background-size: 100% 600px;
+  top: 50%;
+  left: 50%;
+ }
+
+.container{
+   min-height:100vh;
+ }
+ 
+ #appbereich {
+    display:flex;
+    justify-content: center;
+}
