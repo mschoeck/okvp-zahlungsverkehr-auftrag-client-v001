@@ -1,0 +1,18 @@
+.well {
+	background: #CCC;
+	padding-top: 5px;
+	padding-bottom: 5px;
+	padding-left:20px;
+	padding-right:10px;
+	margin-top:150px;
+}
+
+
+#erste_spalte {
+	width: 100px;
+	float:left;
+}
+#zweite_spalte {
+	margin-left: 110px;
+	width: 300px;
+}

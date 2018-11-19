@@ -1,31 +1,32 @@
-<h2>Eingereichte Aufträge</h2>
-<div>   
+<div class="well">
+  <h2>Eingereichte Aufträge</h2>
+  <div>   
     <a type="button" class="btn btn-primary btn-md" routerLink="">Freizugebende Aufträge</a>
     <h2></h2>
-</div>
-<h4 *ngIf="auftragsliste.length == 0">Keine Aufträge vorhanden</h4>
-<table *ngIf="auftragsliste.length > 0" class="table table-hover">
-  <thead>
-    <tr>
-      <th scope="col">Nr.</th>
-      <th scope="col">Empfänger</th>
-      <th scope="col">Betrag</th>
-      <th scope="col">Fälligkeit</th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr class="table-active" *ngFor="let auftrag of auftragsliste" >
-      <th scope="row" routerLink="/detail/{{auftrag.id}}">{{auftrag.id}}</th>
-      <td routerLink="/detail/{{auftrag.id}}">{{auftrag.empfaengerName}}</td>
-      <td routerLink="/detail/{{auftrag.id}}">{{auftrag.betrag | number: '1.2'}} €</td>
-      <td routerLink="/detail/{{auftrag.id}}">{{auftrag.ausfuehrenZum == null? 'Sofort' :(auftrag.ausfuehrenZum | date: 'dd.MM.yyy')}}</td>
-    </tr>
-  </tbody>
-  <!-- routerLink="/detail/{{auftrag.id}}"> -->
-</table>
-<div>
-    <a type="button" class="btn btn-primary btn-md" routerLink="../login">Logout</a>
-    <h2></h2>
   </div>
+  <h4 *ngIf="auftragsliste.length == 0">Keine Aufträge vorhanden</h4>
+  <table *ngIf="auftragsliste.length > 0" class="table table-hover">
+    <thead>
+      <tr class="table-info">
+        <th scope="col">Nr.</th>
+        <th scope="col">Empfänger</th>
+        <th scope="col">Betrag</th>
+        <th scope="col">Fälligkeit</th>
+      </tr>
+    </thead>
+    <tbody>
+     <tr class="table-info" *ngFor="let auftrag of auftragsliste" >
+        <th scope="row" routerLink="/detail/{{auftrag.id}}">{{auftrag.id}}</th>
+        <td routerLink="/detail/{{auftrag.id}}">{{auftrag.empfaengerName}}</td>
+        <td routerLink="/detail/{{auftrag.id}}">{{auftrag.betrag | number: '1.2'}} €</td>
+        <td routerLink="/detail/{{auftrag.id}}">{{auftrag.ausfuehrenZum == null? 'Sofort' :(auftrag.ausfuehrenZum | date: 'dd.MM.yyy')}}</td>
+      </tr>
+    </tbody>
+  <!-- routerLink="/detail/{{auftrag.id}}"> -->
+  </table>
+  <div>
+      <a type="button" class="btn btn-primary btn-md" routerLink="../login">Logout</a>
+    </div>
+</div>
 
 

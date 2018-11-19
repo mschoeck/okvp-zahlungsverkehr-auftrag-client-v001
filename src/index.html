@@ -1,14 +1,32 @@
 <!doctype html>
 <html lang="en">
+<style>
+    .bg{
+       width: 100%;
+       height: 100%;
+       background: url('./assets/images/background1.jpg') no-repeat center;
+       background-size: 100% 100%;
+       top: 50%;
+       left: 50%;
+      }
+     .container{
+        min-height:100vh;
+      }
+      #appbereich {
+        border: 1px solid #666;
+        margin-top: 30px;
+      }
+</style>
 <head>
   <meta charset="utf-8">
-  <title>Zahlungsverkehr</title>
   <base href="/">
-
-  <meta name="viewport" content="width=device-width, initial-scale=1">  
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
 </head>
 <body>
-  <app-root></app-root>
+  <div class="bg">
+      <div id="appbereich"> 
+         <app-root></app-root>
+      </div>
+  </div>
 </body>
 </html>

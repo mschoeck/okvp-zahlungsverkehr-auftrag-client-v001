@@ -1,12 +1,16 @@
+<div class="well">
 <div style="text-align:left">
 <h2>Auftrag Details</h2>
+<div class="btn-group" >
+   <button class="btn-primary btn-md" (click)="goBack()">Zurück</button>
+</div>
 <h2></h2>
 <div class="card text-white bg-info mb-3" style="max-width: 30rem;">
 <div class="card-header">{{auftrag.art}}<span>  Nr.  </span>{{auftrag.id}}</div>
 <div class="card-body">
    <div id="wrapper">
          <div id="erste_spalte">
-            <h6>Empänger</h6>
+            <h6>Empfänger</h6>
             <h6>Institut</h6>
             <h6>IBAN</h6>
             <h6>BIC</h6>
@@ -17,7 +21,6 @@
             <h6>IBAN</h6>
             <h6>BIC</h6>
             <h6>Status</h6>
-            <h6>Freigeber</h6>
          </div>
          <div id="zweite_spalte">
                <h6>{{auftrag.empfaengerName}}</h6>
@@ -30,8 +33,7 @@
                <h6>{{auftrag.senderKontoart}}</h6>
                <h6>{{auftrag.senderIBAN}}</h6>
                <h6>{{auftrag.senderBIC}}</h6>
-               <h6>{{auftrag.status}}</h6>
-               <h6>{{auftrag.aktuellerFreigeber}}</h6>
+               <h6>{{auftrag.status}} / {{auftrag.aktuellerFreigeber}}</h6>
          </div>
       </div>
    </div>
@@ -39,5 +41,5 @@
 <div class="btn-group" >
    <button *ngIf="auftrag.status == 'Erfasst' || auftrag.aktuellerFreigeber == userid" class="btn-success btn-md" (click)="freigeben()">Freigeben</button>
    <button *ngIf="auftrag.status == 'Erfasst' || auftrag.aktuellerFreigeber == userid" class="btn-danger  btn-md" (click)="ablehnen()">Ablehnen</button>
-   <button class="btn-primary btn-md" (click)="goBack()">Zurück</button>
+</div>
 </div>
