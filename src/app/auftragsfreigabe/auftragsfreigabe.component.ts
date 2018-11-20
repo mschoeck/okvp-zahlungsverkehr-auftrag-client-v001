@@ -10,13 +10,13 @@ import { UiprozessService } from '../uiprozess.service';
 import { Bedienerschritt } from '../entities/prozess';
 
 @Component({
-  selector: 'app-auftrag-detail',
-  templateUrl: './auftrag-detail.component.html',
-  styleUrls: ['./auftrag-detail.component.css']
+  selector: 'app-auftragsfreigabe',
+  templateUrl: './auftragsfreigabe.component.html',
+  styleUrls: ['./auftragsfreigabe.component.css']
 })
 
-export class AuftragDetailComponent implements OnInit {
-  
+export class AuftragsfreigabeComponent implements OnInit {
+
   freigabeMoeglich: boolean = true;
   auftrag: Auftrag;
   schritt: Auftragsfreigabeschritt;
@@ -50,45 +50,41 @@ export class AuftragDetailComponent implements OnInit {
   }
 
   freigeben(): void {
-      const id = +this.route.snapshot.paramMap.get('id');
-      this.auftragService.naechsterFreigabeschritt(id).subscribe(
-        schritt => {
-        this.schritt = schritt;
-        this.auftragService.freigebenAuftrag(id, this.schritt.schrittid).subscribe (
-          schritt => {
-            this.schritt = schritt;
-    
-        this.auftragService.getAuftrag(id).subscribe (
-          auftrag => {
-            this.auftrag = auftrag;
-            if (auftrag.status == 'Freigegeben')
-            {
-              this.messageService.error ('Auftrag ' + auftrag.id + ' erfolgreich freigegeben');
-            }
-            else {
-               this.messageService.error ('Auftrag ' + auftrag.id + ' an nächsten Freigeber weitergeleitet');
-            }
-            this.goBack();
-        });
-      });
-      });
-  }
-
-  ablehnen(): void {
-    this.messageService.clear();
     const id = +this.route.snapshot.paramMap.get('id');
-    this.auftragService.naechsterFreigabeschritt(id).subscribe(
+      this.auftragService.freigebenAuftrag(id, this.schritt.schrittid).subscribe (
+        schritt => {
+          this.schritt = schritt;
+          
+  
+      this.auftragService.getAuftrag(id).subscribe (
+        auftrag => {
+          this.auftrag = auftrag;
+          if (auftrag.status == 'Freigegeben')
+          {
+            this.messageService.error ('Auftrag ' + auftrag.id + ' erfolgreich freigegeben');
+          }
+          else {
+             this.messageService.error ('Auftrag ' + auftrag.id + ' an nächsten Freigeber weitergeleitet');
+          }
+          this.goBack();
+      });
+    });
+}
+
+ablehnen(): void {
+  const id = +this.route.snapshot.paramMap.get('id');
+  this.auftragService.naechsterFreigabeschritt(id).subscribe(
+    schritt => {
+    this.schritt = schritt;
+    this.auftragService.ablehnenAuftrag(id, this.schritt.schrittid).subscribe(
       schritt => {
       this.schritt = schritt;
-      this.auftragService.ablehnenAuftrag(id, this.schritt.schrittid).subscribe(
-        schritt => {
-        this.schritt = schritt;
-        this.goBack();
-        });  
-     });
-  }
+      this.goBack();
+      });  
+   });
+}
 
-  goBack(): void {
-    this.location.back();
-  }
+goBack(): void {
+  this.location.back();
+}
 }

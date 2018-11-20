@@ -1,3 +1,7 @@
 .well {
-    background: #CCC;
+    min-width:500px;
+}
+.msgtext {
+    color: yellow;
+    font-size: 130%;
 }

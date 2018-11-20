@@ -22,4 +22,5 @@
  #appbereich {
     display:flex;
     justify-content: center;
+    min-width:550 px;
 }

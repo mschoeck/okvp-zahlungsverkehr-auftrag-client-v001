@@ -3,6 +3,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 import { AuthentifizierungService } from '../authentifizierung.service'; 
 import { User } from '../entities/user';
+import { MessageService } from '../message.service';
+
 
 @Component({
   selector: 'app-login',
@@ -21,6 +23,7 @@ export class LoginComponent implements OnInit {
         private route: ActivatedRoute,
         private router: Router,
         private authenticationService: AuthentifizierungService,
+        private messageService: MessageService
     ) {
         // redirect to home if already logged in
        // if (this.authenticationService.getCurrentUser()) { 
@@ -29,6 +32,7 @@ export class LoginComponent implements OnInit {
     }
 
     ngOnInit() {
+        this.messageService.clear();
     };
 
     login() {

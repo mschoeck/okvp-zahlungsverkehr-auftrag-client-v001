@@ -12,6 +12,7 @@ import { DashboardFreigabeComponent } from './dashboard-freigabe/dashboard-freig
 import { AuftragslisteComponent } from './auftragsliste/auftragsliste.component';
 import { AuftragDetailComponent } from './auftrag-detail/auftrag-detail.component';
 import { UicontrolComponent } from './uicontrol/uicontrol.component';
+import { AuftragsfreigabeComponent } from './auftragsfreigabe/auftragsfreigabe.component';
 
 @NgModule({
  imports: [
@@ -28,6 +29,7 @@ import { UicontrolComponent } from './uicontrol/uicontrol.component';
     LoginComponent,
     MessagesComponent,
     UicontrolComponent,
+    AuftragsfreigabeComponent,
   ],
   providers: [
   ],

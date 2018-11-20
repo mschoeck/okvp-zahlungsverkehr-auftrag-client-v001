@@ -7,6 +7,7 @@ import { AuftragslisteComponent } from './auftragsliste/auftragsliste.component'
 import { AuftragDetailComponent } from './auftrag-detail/auftrag-detail.component';
 import { LoginComponent } from './login/login.component';
 import { AuthGuard} from './helpers/auth.guard';
+import { AuftragsfreigabeComponent } from './auftragsfreigabe/auftragsfreigabe.component';
 
 const routes: Routes = [
 // Simuliert als Alternative mit Screenshots einen UI-Ablauf
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'dashboard-freigabe', component: DashboardFreigabeComponent },
   { path: 'auftragsliste', component: AuftragslisteComponent },
   { path: 'detail/:id', component: AuftragDetailComponent },
+  { path: 'freigabe/:id', component: AuftragsfreigabeComponent},
   { path: 'login', component: LoginComponent },
   { path: 'uicontrol', component: UicontrolComponent}
 ];
